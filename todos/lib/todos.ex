@@ -15,7 +15,7 @@ defmodule Todos do
   end
   def compound_list do
     mult = &(&1 * &2)
-    list = for i <- [1,2,3], j <- [2,3,4], do: &Math.mult.(i, j)
+    list = for i <- [1,2,3], j <- [2,3,4], do: mult.(i, j)
     list
   end
 
@@ -66,7 +66,7 @@ defmodule Todos do
   end
 
   def char_freq(phrase) do
-    String(word).trim() |> String.graphemes() |> Enum.frequencies()
+    String.trim(phrase) |> String.graphemes() |> Enum.frequencies()
 
   end
 
