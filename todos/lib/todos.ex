@@ -43,12 +43,12 @@ defmodule Todos do
     todo_list
   end
 
-  def guess do
+  def guess_game do
     answer = 51
     guesses = 3
-    for guess <- 1..guesses, do: guess+1
+    # for guess <- 1..guesses, do: guess+1
     for guess <- 1..guesses do
-      {number, _} = IO.gets("Guess a number: ") |> Integer.parse()
+      {number, _} = IO.gets(guess++".) Guess a number: ") |> Integer.parse()
       if number == answer do
         IO.puts("correct")
         answer
@@ -61,13 +61,17 @@ defmodule Todos do
       #     IO.puts("higher")
       #   end
       end
+      IO.gets("The correct answer was "++guess)
     end
-    IO.gets("The correct answer was ", guess)
   end
 
   def char_freq(phrase) do
     String.trim(phrase) |> String.graphemes() |> Enum.frequencies()
 
+  end
+
+  defp _private_fn do
+    IO.puts("This is a private module funciton")
   end
 
 end
