@@ -74,4 +74,19 @@ defmodule Todos do
     IO.puts("This is a private module funciton")
   end
 
+  def save(tasks, filename) do
+    # invoke erlang code - convert list to binary blob
+    binary = :erlang.term_to_binary(tasks)
+    File.write(filename, binary)
+  end
+
+  def read(filename) do
+    case File.read(filename) do
+      {:ok, binary} -> :erlang.binary_to_term(binary)
+      {:error, reason} -> "File does not exist: "<>Atom.to_string(reason)
+    end
+    # {_status, binary} = File.read(filename)
+    # file = :erlang.binary_to_term(binary)
+    # file
+  end
 end
