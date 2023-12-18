@@ -1,4 +1,4 @@
-defmodule AdventOfCode2023 do
+defmodule AdventPart2 do
   @moduledoc """
   Documentation for `AdventOfCode2023`.
   """
@@ -7,6 +7,7 @@ defmodule AdventOfCode2023 do
   Hello world.
 
   ## Examples
+  
 
       iex> AdventOfCode2023.hello()
       :world
@@ -15,20 +16,31 @@ defmodule AdventOfCode2023 do
   def hello do
     :world
   end
+  def replaceWordWithDigit(input) do
+    input
+    |> String.replace(
+      ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "eno", "owt", "eerht", "ruof", "evif", "xis", "neves", "thgie", "enin"],
+      fn word -> Integer.to_string(%{
+        one: 1, eno: 1, two: 2, owt: 2, three: 3, eerht: 3, 
+        four: 4, ruof: 4, five: 5, evif: 5, six: 6, xis: 6, 
+        seven: 7, neves: 7, eight: 8, thgie: 8, nine: 9, enin: 9
+        }[String.to_atom(word)]) end
+      )
+  end
   
   def getFirstLastNumber(input) do
-    Regex.run(~r/\d/, input)
-    |> Enum.concat(Regex.run(~r/\d/, String.reverse(input)))
+   Regex.run(~r/\d/i, replaceWordWithDigit(input))
+    |> Enum.concat(Regex.run(~r/\d/, replaceWordWithDigit(String.reverse(input))))
     |> Enum.join()
     |> String.to_integer()
   end
   
-  def checkInput(input) do
+  def checkString(input) do
     input
     |> String.split("\n", trim: true)
     |> Enum.map(fn x -> getFirstLastNumber(x) end)
   end
-  def sumCheckInput(arr) do
+  def sumList(arr) do
     arr
     |> Enum.sum()
   end
@@ -1033,7 +1045,7 @@ defmodule AdventOfCode2023 do
     7877pzrbtcsddmrffzdsmqlqkjsix
     5four3eight
     15nine1"
-    |> checkInput()
-    |> sumCheckInput()
+    |> checkString()
+    |> sumList()
   end
 end
