@@ -10,6 +10,8 @@ defmodule Day2 do
     |> Regex.scan(input)
     |> List.flatten
     |> Enum.map(fn (x) -> String.to_integer(x) end)
+    |> Enum.sort 
+    |> Enum.reverse
   end
   
   def transformGames(input) do
@@ -31,7 +33,7 @@ defmodule Day2 do
           Enum.filter(reds, fn (y) -> y > 12 end)|>length
         ])
       } end)
-      |> IO.inspect
+      # |> IO.inspect
   end
   
   def sumPossibleGames(games) do
@@ -39,10 +41,18 @@ defmodule Day2 do
       |> Enum.filter(fn (x) -> 
         Map.get(x, :impossible) == 0
       end)
-      |> IO.inspect
+      # |> IO.inspect
       |> Enum.map(fn (x) -> Map.get(x, :game) end)
       |> MapSet.new
       # |> IO.inspect
       |> Enum.sum
+  end
+  
+  def maxPower(games) do
+    transformGames(games)
+    |> Enum.map(fn (x) -> 
+      List.first(Map.get(x, :blue)) * List.first(Map.get(x, :red)) * List.first(Map.get(x, :green))
+    end)
+    |> Enum.sum
   end
 end
