@@ -27,7 +27,7 @@ defmodule Day3 do
   end
   
   def isAdjacent(symb, num, width) do
-    symb+1 == num ||
+    adj = symb+1 == num ||
     symb-1 == num || 
     symb+width == num || 
     symb-width == num ||
@@ -35,6 +35,10 @@ defmodule Day3 do
     symb-width+1 == num ||
     symb+width-1 == num ||
     symb+width+1 == num 
+    if adj == true do
+      IO.inspect([adj, symb, num])
+    end
+    adj
   end
   
   def isPartNumberAdjacent(input) do
@@ -43,13 +47,12 @@ defmodule Day3 do
     Day3.getPartNumbersIdx(input)
     |> Enum.filter(fn (num) -> 
       Day3.getSymbolIdxList(input)
-      |> Enum.map(fn (symb) -> 
+      |> Enum.each(fn (symb) -> 
         Enum.any?(1..elem(num, 1), fn (idx) -> 
           isAdjacent(symb, elem(num, 0) + idx, width)
         end)
       end)   
     end)
-    |> IO.inspect
     |> Enum.map(fn y -> 
         Enum.map(1..elem(y, 1), fn z -> 
           Enum.at(String.graphemes(str), (elem(y, 0) - 1 + z)) end)
@@ -60,7 +63,6 @@ defmodule Day3 do
     |> Enum.map(fn x -> 
         String.to_integer(x)
     end)
-    |> IO.inspect
     
   end
 end

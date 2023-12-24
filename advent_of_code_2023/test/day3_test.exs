@@ -15,6 +15,11 @@ defmodule Day3Test do
     .664.598..") == 10
   end
   
+  test "isAdjacent" do
+    assert Day3.isAdjacent(3, 13, 10) == true
+    assert Day3.isAdjacent(3, 16, 10) == false
+  end
+  
   test "getSymbolIdxList" do
     assert Day3.getSymbolIdxList("467..114..
     ...*......
