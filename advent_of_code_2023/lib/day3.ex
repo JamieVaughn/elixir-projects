@@ -26,6 +26,8 @@ defmodule Day3 do
     # |> IO.inspect
   end
   
+  
+  
   def isAdjacent(symb, num, width) do
     adj = symb+1 == num ||
     symb-1 == num || 
